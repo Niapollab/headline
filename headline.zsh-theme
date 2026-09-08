@@ -663,10 +663,10 @@ headline-precmd() {
 
   # Prompt
   if [[ $HL_PRINT_MODE == 'prompt' ]]; then
-    PROMPT='$('
-    (( ${#HL_OUTPUT_SEP} )) && PROMPT+='print -rP "$HL_OUTPUT_SEP"; '
-    (( ${#HL_OUTPUT_INFO} )) && PROMPT+='print -rP "$HL_OUTPUT_INFO"; '
-    PROMPT+='print -rP "$HL_PROMPT")'
+    PROMPT=''
+    (( ${#HL_OUTPUT_SEP} )) && PROMPT+="${HL_OUTPUT_SEP}"$'\n'
+    (( ${#HL_OUTPUT_INFO} )) && PROMPT+="${HL_OUTPUT_INFO}"$'\n'
+    PROMPT+="$HL_PROMPT"
   else
     PROMPT=$HL_PROMPT
   fi
