@@ -474,6 +474,15 @@ headline-clear-screen() {
   print -nr "$cursor_show"
 }
 
+# Handle terminal resize (SIGWINCH)
+# In prompt mode, recompute layout for new width and redraw without scrollback artifacts
+TRAPWINCH() {
+  if [[ -o zle && $HL_PRINT_MODE == 'prompt' ]]; then
+    headline-precmd
+    zle .reset-prompt 2>/dev/null
+  fi
+}
+
 # Before executing command
 add-zsh-hook preexec headline-preexec
 headline-preexec() {
